@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Header,Form, Body
+from app.module_login import login
+from fastapi import FastAPI, Header, Form, Body
 from pydantic import BaseModel
 
 
@@ -19,27 +20,23 @@ class Service(BaseModel):
     parameter: list
     created_at: str
 
+
 class incoming_message(BaseModel):
     session_id: str
     text: str
     context: dict
+
 
 class outgoing_message(BaseModel):
     text: str
     context: dict
 
 
+app = FastAPI()
 
-app = FastAPI(
-    title="Chat API",
-    description="Chat Backend API",
-    version="0.1.0"
-)
-
-from app.module_login import login
 app.include_router(login.router)
+
 
 @app.get("/")
 def read_root():
     return {"Hello": "Worldkkk"}
-

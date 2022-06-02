@@ -1,9 +1,7 @@
 from fastapi import APIRouter
 
-router = APIRouter(
-    prefix="/login",
-    tags=["login"]
-)
+router = APIRouter(prefix="/users", tags=["users"])
+
 
 @router.get("/")
 def hello_login():
